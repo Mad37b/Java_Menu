@@ -40,7 +40,7 @@ public class VentanaMenú extends JFrame {
 	JLabel labelFondo = new JLabel();
 
 	public static String Ruta = new String(
-			"C:\\Users\\Profesor\\Desktop\\FP Grado Superior\\01 Programación\\02 Ejercicios Java\\Java_Menú\\");
+			"C:\\Users\\ULISES III\\Desktop\\Instituto FP DUAL SUPERIOR\\01 Programación\\Ejercicios Java\\Java_Menu\\");
 
 	// Array del Menu del restaurante
 
@@ -168,6 +168,8 @@ public class VentanaMenú extends JFrame {
 
 		/** Llamar a los metodos **/
 		fondo();
+		cargarOpciones(comboBoxPrimero, comboBoxSegundo, comboBoxPostres, comboBoxBebidas);
+		
 
 	}
 
@@ -193,17 +195,24 @@ public class VentanaMenú extends JFrame {
 		
 	/** Creacion de los menus **/
 		
-		String directorio = new File("").getAbsolutePath();
+		// Rutas 
 		
-		String ficheroPrimeros = directorio + "\\PrimerPlato\\primeros.vda";
-		String ficheroSegundos = directorio + "\\SegundoPlato\\segundos.vda";
-		String ficheroPostre = directorio + "\\Postre\\postre.vda";
-		String ficheroBebidas = directorio + "\\Bebidas\\Bebidas.var";
-		File fichero = new File(ficheroPrimeros);
+		String rutaPrimeros =new File("").getAbsolutePath() + "\\PrimerPlato\\primeros.vda";
+		String rutaSegundos = new File("").getAbsolutePath() + "\\SegundoPlato\\segundos.vda";
+		String rutaPostre = new File("").getAbsolutePath() + "\\Postre\\postre.vda";
+		String rutaBebidas = new File("").getAbsolutePath() + "\\Bebidas\\Bebidas.vda";
+		
+		//Ficheros
+		
+		File ficheroPrimeros=new File(rutaPrimeros);
+		File ficheroSegundos=new File(rutaSegundos);
+		File ficheroPostre=new File(rutaPostre);
+		File ficheroBebidas=new File(rutaBebidas);
+		
 		
 		/** Imagenes **/
 		
-		labelImagenPrimero= new label();
+		//labelImagenPrimero= new label();
 
 		try {
 			Scanner scannerPrimero = new Scanner(ficheroPrimeros);
@@ -218,20 +227,21 @@ public class VentanaMenú extends JFrame {
 			
 			}
 			
+			
 			while (scannerSegundo.hasNextLine()) {
-				String lineaSegundo = scannerPrimero.nextLine(); // Guardamos la linea en un String
+				String lineaSegundo = scannerSegundo.nextLine(); // Guardamos la linea en un String
 				comboBoxSegundo.addItem(lineaSegundo);
 				
 			}
 			
 			while (scannerPostre.hasNextLine()) {
-				String lineaPostre = scannerPrimero.nextLine(); // Guardamos la linea en un String
+				String lineaPostre = scannerPostre.nextLine(); // Guardamos la linea en un String
 				comboBoxPostres.addItem(lineaPostre);
 				
 			}
 			
 			while (scannerBebidas.hasNextLine()) {
-				String lineaBebidas = scannerPrimero.nextLine(); // Guardamos la linea en un String
+				String lineaBebidas = scannerBebidas.nextLine(); // Guardamos la linea en un String
 				comboBoxBebidas.addItem(lineaBebidas);
 			
 			}
