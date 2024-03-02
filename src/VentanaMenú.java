@@ -12,6 +12,7 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 import javax.swing.JTextPane;
@@ -96,6 +97,7 @@ public class VentanaMenú extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBoxPrimero.getSelectedIndex() != 0) {
 					verMensaje(comboBoxPrimero.getSelectedItem().toString());
+					
 				}
 			}
 		});
@@ -110,10 +112,18 @@ public class VentanaMenú extends JFrame {
 		bottonMenu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent event) {
-
+				Fichero nuevoFichero= new Fichero();
 				if (event.getSource() == bottonMenu) {
+					
+					String seleccionPrimero = (String) comboBoxPrimero.getSelectedItem();
+		            String seleccionSegundo = (String) comboBoxSegundo.getSelectedItem();
+		            String seleccionPostre = (String) comboBoxPostres.getSelectedItem();
+		            String seleccionBebida = (String) comboBoxBebidas.getSelectedItem();
+		            
+		            Fichero.crearFichero(seleccionPrimero, seleccionSegundo, seleccionPostre, seleccionBebida);
 
 					cargarOpciones(comboBoxPrimero, comboBoxSegundo, comboBoxPostres, comboBoxBebidas);
+					
 
 				}
 
@@ -170,6 +180,7 @@ public class VentanaMenú extends JFrame {
 		fondo();
 		cargarOpciones(comboBoxPrimero, comboBoxSegundo, comboBoxPostres, comboBoxBebidas);
 		
+		
 
 	}
 
@@ -194,20 +205,27 @@ public class VentanaMenú extends JFrame {
 	public static void cargarOpciones(JComboBox<String> comboBoxPrimero, JComboBox <String> comboBoxSegundo, JComboBox <String> comboBoxPostres, JComboBox <String> comboBoxBebidas) {
 		
 	/** Creacion de los menus **/
-		
+		System.out.println("Iniciando carga de opciones..."+"\n");
 		// Rutas 
 		
-		String rutaPrimeros =new File("").getAbsolutePath() + "\\PrimerPlato\\primeros.vda";
+		String rutaPrimeros = "C:\\Users\\ULISES III\\Desktop\\Instituto FP DUAL SUPERIOR\\01 Programación\\Ejercicios Java\\Java_Menu\\PrimerPlato\\primeros.vda";
+		 System.out.println("Ruta de primeros platos: " + rutaPrimeros);
 		String rutaSegundos = new File("").getAbsolutePath() + "\\SegundoPlato\\segundos.vda";
+		System.out.println("Ruta de segundos platos: " + rutaSegundos);
 		String rutaPostre = new File("").getAbsolutePath() + "\\Postre\\postre.vda";
-		String rutaBebidas = new File("").getAbsolutePath() + "\\Bebidas\\Bebidas.vda";
-		
+		System.out.println("Ruta de postres: " + rutaPostre);
+		String rutaBebidas = new File("").getAbsolutePath() + "\\Bebidas\\bebidas.vda";
+		 System.out.println("Ruta de bebidas: " + rutaBebidas);
 		//Ficheros
 		
 		File ficheroPrimeros=new File(rutaPrimeros);
 		File ficheroSegundos=new File(rutaSegundos);
 		File ficheroPostre=new File(rutaPostre);
 		File ficheroBebidas=new File(rutaBebidas);
+		
+		System.out.println("\n");
+		
+		System.out.println("Testeo de fichero Primeros" + ficheroPrimeros);
 		
 		
 		/** Imagenes **/
@@ -219,11 +237,15 @@ public class VentanaMenú extends JFrame {
 			Scanner scannerSegundo = new Scanner(ficheroSegundos);
 			Scanner scannerPostre = new Scanner(ficheroPostre);
 			Scanner scannerBebidas = new Scanner(ficheroBebidas);
+			
+			System.out.println("Leyendo archivos de opciones...");
 
 			// Leemos linea a linea el fichero
 			while (scannerPrimero.hasNextLine()) {
 				String lineaPrimera = scannerPrimero.nextLine(); // Guardamos la linea en un String
 				comboBoxPrimero.addItem(lineaPrimera);
+				System.out.println("testeo primer plato = "+lineaPrimera);
+				System.out.println("Testeo comboBox = "+comboBoxPrimero);
 			
 			}
 			
@@ -252,7 +274,9 @@ public class VentanaMenú extends JFrame {
 			scannerBebidas.close();
 			
 		} catch (Exception ex) {
-			System.out.println("Mensaje: " + ex.getMessage() + comboBoxPrimero);
+			System.out.println("Mensaje: " + ex.getMessage() );
+			System.out.println("\n");
+			ex.printStackTrace();
 		}
 	}
 
